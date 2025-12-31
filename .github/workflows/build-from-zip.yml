@@ -1,4 +1,4 @@
-name: Build APK from ZIP (FINAL)
+name: Build APK from ZIP (AUTO FIX ASSET)
 
 on:
   push:
@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install unzip
-        run: sudo apt-get update && sudo apt-get install unzip -y
+      - name: Install unzip & wget
+        run: sudo apt-get update && sudo apt-get install unzip wget -y
 
       - name: Extract ZIP
         run: |
@@ -25,6 +25,13 @@ jobs:
         with:
           flutter-version: '3.38.5'
           cache: true
+
+      - name: AUTO FIX FONT ASSET
+        run: |
+          cd project
+          mkdir -p fonts
+          wget -O fonts/Orbitron-Regular.ttf https://github.com/google/fonts/raw/main/ofl/orbitron/Orbitron-Regular.ttf
+          ls fonts
 
       - name: Flutter Doctor
         run: flutter doctor -v
