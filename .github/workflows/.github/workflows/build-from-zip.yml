@@ -1,4 +1,4 @@
-name: Build APK from ZIP (AUTO FIX)
+name: Build APK from ZIP (FINAL)
 
 on:
   push:
@@ -23,14 +23,8 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6'
+          flutter-version: '3.38.5'
           cache: true
-
-      - name: AUTO FIX pubspec SDK
-        run: |
-          cd project
-          sed -i 's/sdk: .*/sdk: ">=3.3.0 <4.0.0"/' pubspec.yaml
-          cat pubspec.yaml
 
       - name: Flutter Doctor
         run: flutter doctor -v
